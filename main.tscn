@@ -1,0 +1,215 @@
+[gd_scene load_steps=8 format=3 uid="uid://bx4gr8ct4cxw2"]
+
+[ext_resource type="Theme" uid="uid://brglhbsu1tlos" path="res://main_theme.tres" id="1_em2tr"]
+[ext_resource type="Script" path="res://main.gd" id="1_ti000"]
+[ext_resource type="Shader" path="res://background.gdshader" id="2_qg7bk"]
+[ext_resource type="Texture2D" uid="uid://bymfeufsyk8qf" path="res://kenney_ui-pack (2)/PNG/blue_button00.png" id="3_26ktn"]
+[ext_resource type="AudioStream" uid="uid://bcystq22wu6k5" path="res://kenney_interface-sounds/Audio/click_005.ogg" id="4_dqh8c"]
+[ext_resource type="AudioStream" uid="uid://d3tcam8vk2i8j" path="res://kenney_interface-sounds/Audio/click_003.ogg" id="5_kvoy2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fj8qq"]
+shader = ExtResource("2_qg7bk")
+shader_parameter/background_color = Color(0, 0, 0, 1)
+shader_parameter/foreground_color = Color(1, 1, 1, 1)
+shader_parameter/grid_size = 50.0
+shader_parameter/dot_size = 0.1
+shader_parameter/speed = 1.0
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_ti000")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_fj8qq")
+position = Vector2(301, 307)
+scale = Vector2(3.81579, 13.4184)
+texture = ExtResource("3_26ktn")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 600.0
+offset_bottom = 601.0
+
+[node name="Panel" type="Panel" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -250.0
+offset_right = 250.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_em2tr")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -160.0
+offset_top = -132.5
+offset_right = 161.0
+offset_bottom = 46.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Goalstatement" type="Label" parent="Control/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_em2tr")
+text = "My goal is to complete"
+horizontal_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Control/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="GoalAmount" type="LineEdit" parent="Control/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("1_em2tr")
+placeholder_text = "amount"
+max_length = 9
+expand_to_text_length = true
+caret_blink = true
+
+[node name="GoalUnits" type="LineEdit" parent="Control/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("1_em2tr")
+placeholder_text = "units"
+max_length = 14
+expand_to_text_length = true
+
+[node name="OfLabel" type="Label" parent="Control/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("1_em2tr")
+text = "of"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Control/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="GoalName" type="LineEdit" parent="Control/VBoxContainer/HBoxContainer3"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("1_em2tr")
+placeholder_text = "activity"
+alignment = 1
+max_length = 25
+expand_to_text_length = true
+
+[node name="PeriodLabel" type="Label" parent="Control/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+theme = ExtResource("1_em2tr")
+text = "."
+
+[node name="Control" type="Control" parent="Control/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="Control/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="Control/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+theme = ExtResource("1_em2tr")
+text = "I have done"
+
+[node name="TotalDoneAmount" type="LineEdit" parent="Control/VBoxContainer/HBoxContainer4"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("1_em2tr")
+placeholder_text = "amount"
+max_length = 10
+expand_to_text_length = true
+
+[node name="UnchangingUnitsLabel" type="Label" parent="Control/VBoxContainer/HBoxContainer4"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("1_em2tr")
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="Control/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="Control/VBoxContainer/HBoxContainer5"]
+layout_mode = 2
+theme = ExtResource("1_em2tr")
+text = "Today I did"
+horizontal_alignment = 1
+
+[node name="TodayDoneAmount" type="LineEdit" parent="Control/VBoxContainer/HBoxContainer5"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("1_em2tr")
+placeholder_text = "Amount"
+max_length = 10
+expand_to_text_length = true
+context_menu_enabled = false
+caret_blink = true
+
+[node name="UnchangingUnitsLabel2" type="Label" parent="Control/VBoxContainer/HBoxContainer5"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("1_em2tr")
+
+[node name="Control2" type="Control" parent="Control/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="HBoxContainer6" type="HBoxContainer" parent="Control/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="AmountLeftLabel" type="Label" parent="Control/VBoxContainer/HBoxContainer6"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("1_em2tr")
+horizontal_alignment = 1
+
+[node name="CloseButton" type="Button" parent="Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -25.0
+offset_top = -126.0
+offset_right = 25.0
+offset_bottom = -95.0
+grow_horizontal = 2
+grow_vertical = 0
+focus_mode = 0
+theme = ExtResource("1_em2tr")
+text = "Close"
+
+[node name="Click" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_dqh8c")
+
+[node name="LineEdit" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_kvoy2")
+
+[connection signal="focus_entered" from="Control/VBoxContainer/HBoxContainer2/GoalAmount" to="." method="_on_goal_amount_focus_entered"]
+[connection signal="focus_exited" from="Control/VBoxContainer/HBoxContainer2/GoalAmount" to="." method="_update_all_stats_resource"]
+[connection signal="text_submitted" from="Control/VBoxContainer/HBoxContainer2/GoalAmount" to="." method="_on_goal_amount_text_submitted"]
+[connection signal="focus_exited" from="Control/VBoxContainer/HBoxContainer2/GoalUnits" to="." method="_update_all_stats_resource"]
+[connection signal="text_submitted" from="Control/VBoxContainer/HBoxContainer2/GoalUnits" to="." method="_on_goal_units_text_submitted"]
+[connection signal="focus_exited" from="Control/VBoxContainer/HBoxContainer3/GoalName" to="." method="_update_all_stats_resource"]
+[connection signal="text_submitted" from="Control/VBoxContainer/HBoxContainer3/GoalName" to="." method="_on_goal_name_text_submitted"]
+[connection signal="focus_exited" from="Control/VBoxContainer/HBoxContainer4/TotalDoneAmount" to="." method="_update_all_stats_resource"]
+[connection signal="text_submitted" from="Control/VBoxContainer/HBoxContainer4/TotalDoneAmount" to="." method="_on_total_done_amount_text_submitted"]
+[connection signal="focus_exited" from="Control/VBoxContainer/HBoxContainer5/TodayDoneAmount" to="." method="_update_all_stats_resource"]
+[connection signal="text_submitted" from="Control/VBoxContainer/HBoxContainer5/TodayDoneAmount" to="." method="_on_today_done_amount_text_submitted"]
+[connection signal="pressed" from="Control/CloseButton" to="." method="_on_close_button_pressed"]
