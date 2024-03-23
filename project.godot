@@ -11,9 +11,11 @@ config_version=5
 [application]
 
 config/name="Simple Hour Tracker"
+config/description="This is a simple app to track progress towards a specific goal."
 run/main_scene="res://main.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="res://GNOME_Clocks_Logo_2018.svg"
+config/windows_native_icon="res://icon.ico"
 
 [display]
 
