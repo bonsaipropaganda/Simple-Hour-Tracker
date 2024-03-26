@@ -70,6 +70,8 @@ func _on_total_done_amount_text_submitted(new_text):
 	update_labels()
 
 func _on_today_done_amount_text_submitted(new_text):
+	if float(new_text) > 0:
+		$bonus.play()
 	stats_res.total_amount_done += float(new_text)
 	ResourceSaver.save(stats_res, save_file_path + save_file_name)
 	update_labels()

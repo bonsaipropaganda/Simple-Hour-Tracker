@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bx4gr8ct4cxw2"]
+[gd_scene load_steps=9 format=3 uid="uid://bx4gr8ct4cxw2"]
 
 [ext_resource type="Theme" uid="uid://brglhbsu1tlos" path="res://main_theme.tres" id="1_em2tr"]
 [ext_resource type="Script" path="res://main.gd" id="1_ti000"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bymfeufsyk8qf" path="res://kenney_ui-pack (2)/PNG/blue_button00.png" id="3_26ktn"]
 [ext_resource type="AudioStream" uid="uid://bcystq22wu6k5" path="res://kenney_interface-sounds/Audio/click_005.ogg" id="4_dqh8c"]
 [ext_resource type="AudioStream" uid="uid://d3tcam8vk2i8j" path="res://kenney_interface-sounds/Audio/click_003.ogg" id="5_kvoy2"]
+[ext_resource type="AudioStream" uid="uid://cnxvstsoiqx0s" path="res://game-bonus-144751.mp3" id="7_wr0ia"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fj8qq"]
 shader = ExtResource("2_qg7bk")
@@ -200,6 +201,9 @@ stream = ExtResource("4_dqh8c")
 
 [node name="LineEdit" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_kvoy2")
+
+[node name="bonus" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_wr0ia")
 
 [connection signal="focus_entered" from="Control/VBoxContainer/HBoxContainer2/GoalAmount" to="." method="_on_goal_amount_focus_entered"]
 [connection signal="focus_exited" from="Control/VBoxContainer/HBoxContainer2/GoalAmount" to="." method="_update_all_stats_resource"]
