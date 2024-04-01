@@ -205,6 +205,11 @@ stream = ExtResource("5_kvoy2")
 [node name="bonus" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_wr0ia")
 
+[node name="TestLabel" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+
 [connection signal="focus_entered" from="Control/VBoxContainer/HBoxContainer2/GoalAmount" to="." method="_on_goal_amount_focus_entered"]
 [connection signal="focus_exited" from="Control/VBoxContainer/HBoxContainer2/GoalAmount" to="." method="_update_all_stats_resource"]
 [connection signal="text_submitted" from="Control/VBoxContainer/HBoxContainer2/GoalAmount" to="." method="_on_goal_amount_text_submitted"]

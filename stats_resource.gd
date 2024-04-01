@@ -5,3 +5,5 @@ class_name StatsResource
 @export var goal_units: String
 @export var goal_name: String
 @export var total_amount_done: float
+
+@export var current_streak: int

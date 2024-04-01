@@ -4,6 +4,11 @@ var save_file_path = "user://save/"
 var save_file_name = "user_stats.tres"
 var stats_res
 
+func _process(delta):
+	# this is for testing purposes
+	var current_datetime = Time.get_datetime_dict_from_system(false)
+	var current_datetime_unix = Time.get_unix_time_from_datetime_dict(current_datetime)
+	print(current_datetime_unix)
 
 func _ready():
 	$Sprite2D.material.set_shader_parameter("speed", .01)
