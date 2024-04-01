@@ -4,19 +4,16 @@ var save_file_path = "user://save/"
 var save_file_name = "user_stats.tres"
 var stats_res
 
-func _process(delta):
-	# this is for testing purposes
-	var current_datetime = Time.get_datetime_dict_from_system(false)
-	var current_datetime_unix = Time.get_unix_time_from_datetime_dict(current_datetime)
-	print(current_datetime_unix)
 
 func _ready():
+	# setup our background shader
 	$Sprite2D.material.set_shader_parameter("speed", .01)
 	$Sprite2D.material.set_shader_parameter("dot_size", .1)
 	
 	# make a directory on computer for save data. please note I know this is unsafe. It's not a concern for a project this small though
 	DirAccess.make_dir_absolute(save_file_path)
 	stats_res = ResourceLoader.load(save_file_path + save_file_name)
+	
 	# check if null
 	if stats_res == null:
 		stats_res = StatsResource.new()
@@ -24,9 +21,11 @@ func _ready():
 	else:
 		update_labels()
 
+
 func _input(event):
 	if event.is_action_pressed("click"):
 		$Click.play()
+
 
 func update_labels():
 		if stats_res.goal_amount > 0:
@@ -47,6 +46,7 @@ func update_labels():
 			if stats_res.goal_amount > 0:
 				%AmountLeftLabel.text = "Great job! You did it!"
 
+
 func _on_goal_amount_text_submitted(new_text):
 	new_text = int(new_text)
 	if new_text == 0:
@@ -64,20 +64,24 @@ func _on_goal_units_text_submitted(new_text):
 	ResourceSaver.save(stats_res, save_file_path + save_file_name)
 	update_labels()
 
+
 func _on_goal_name_text_submitted(new_text):
 	stats_res.goal_name = new_text
 	ResourceSaver.save(stats_res, save_file_path + save_file_name)
 	update_labels()
+
 
 func _on_total_done_amount_text_submitted(new_text):
 	stats_res.total_amount_done = float(new_text)
 	ResourceSaver.save(stats_res, save_file_path + save_file_name)
 	update_labels()
 
+
 func _on_today_done_amount_text_submitted(new_text):
 	if float(new_text) > 0:
 		$bonus.play()
 	stats_res.total_amount_done += float(new_text)
+	check_for_streak(stats_res.last_entry_daystamp)
 	ResourceSaver.save(stats_res, save_file_path + save_file_name)
 	update_labels()
 	%TodayDoneAmount.text = ""
@@ -112,7 +116,28 @@ func _update_all_stats_resource():
 	update_labels()
 
 
+func check_for_streak(days_since_epoch):
+	# first we rule out that another entry is being made on the same day
+	if days_since_epoch == stats_res.last_entry_daystamp:
+		return
+	# if the current day is one day after the last entry then we add one to our counter
+	if days_since_epoch == stats_res.last_entry_daystamp + 1:
+		stats_res.current_streak += 1
+	
+	else:
+		# reset streak
+		stats_res.current_streak = 0
+	ResourceSaver.save(stats_res, save_file_path + save_file_name)
+	
+	# create a timestamp overriding the current timestamp
+	create_timestamp()
 
+
+func create_timestamp():
+	# get current system time in sytem's time zone
+	# convert this time to days since unix epoch
+	# save that overriding current var in stats resource and then save that to computer
+	pass
 
 
 func _on_close_button_pressed():
