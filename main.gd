@@ -83,6 +83,11 @@ func _on_today_done_amount_text_submitted(new_text):
 	if float(new_text) > 0:
 		$bonus.play()
 	stats_res.total_amount_done += float(new_text)
+	
+	# if your streak is currently 0 but you submitted something then you get streak +1
+	if stats_res.current_streak == 0:
+		stats_res.current_streak = 1
+	
 	check_for_streak()
 	ResourceSaver.save(stats_res, save_file_path + save_file_name)
 	update_labels()
